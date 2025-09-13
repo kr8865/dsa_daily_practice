@@ -45,35 +45,7 @@ public class tree_all {
         max=Math.max(slf,max);
         return Math.max(ld,rd)+1;
     }
-    public static void preorder(Node root){
-        if(root==null){
-            return ;
-        }
-        System.out.print(root.data+" ");
-        preorder(root.left);
-        preorder(root.right);
-
-    }
-    public static void postorder(Node root){
-        if(root==null){
-            return ;
-        }
-       
-        postorder(root.left);
-        postorder(root.right);
-        System.out.print(root.data+" ");
-        
-    }
-    public static void inorder(Node root){
-        if(root==null){
-            return ;
-        }
-        
-        inorder(root.left);
-        System.out.print(root.data+" ");
-        inorder(root.right);
-        
-    }
+    
     static int i=-1;
     public static Node buildpre(int[] nodes){
         i++;
@@ -106,69 +78,72 @@ public class tree_all {
         return newnode;
 
     }
-    public static void levelOrder(Node root){
-        Queue<Node> q=new LinkedList<>();
-        ArrayList<ArrayList<Integer>> finall=new ArrayList<>();
-        q.add(root);
-        q.add(null);
-        ArrayList<Integer> level=new ArrayList<>();
+    
+    public static void Boundarytraversal(){
 
-        while(!q.isEmpty()){
-           
-            Node val=q.remove();
-            if(val==null){
-                finall.add((level));
-                level=new ArrayList<>();
 
-                if(!q.isEmpty()){
-                    q.add(null);
-                }
-            }
-            else{
-                level.add(val.data);
-                if(val.left!=null){
-                    q.add(val.left);
-                }
-                if(val.right!=null){
-                    q.add(val.right);
-                }
 
-            }
 
-        }
-        Collections.reverse(finall);
-        for(int i=0;i<finall.size();i++){
-            System.out.println(finall.get(i));
-        }
-        System.out.println();
+
+
+
+
+        
     }
-    public static void Zigzag(Node root){
-        Queue<Node> q=new LinkedList();
-        q.add(root);
-        boolean dir=false;
+    static int maxv= Integer.MIN_VALUE;
+    public static int Max_path(Node root){
+        if(root==null){
+            return 0;
+        }
+        int l_max=Math.max(0,Max_path(root.left));
+        int r_max=Math.max(0,Max_path(root.right));
+        int slf_max=l_max+r_max+root.data;
+        maxv=Math.max(max,slf_max);
 
-        while(!q.isEmpty()){
-            int size=q.size();
-            ArrayList<Integer> level=new ArrayList<>();
-            for(int i=0;i<size;i++){
-                Node val=q.remove();
-                level.add(val.data);
-                if(val.left!=null){
-                    q.add(val.left);
-                }
-                if(val.right!=null){
-                    q.add(val.right);
-                }
+
+        return Math.max(l_max,r_max)+root.data;
+    }
+    public static int lca(Node root,Node root1,Node root2){
+        ArrayList<Integer> ll1=new ArrayList<>();
+         ArrayList<Integer> ll2=new ArrayList<>();
+        path(root,root1.data,ll1);
+        path(root,root1.data,ll2);
+        for(int i=0;i<ll1.size() && i<ll2.size();i++){
+            if(ll1.get(i)!=ll2.get(i)){
+                break;
             }
 
-                if(dir){
-                    Collections.reverse(level);
-                }
-                dir=!dir;
-                System.out.println(level);   
-
         }
+        int lca=ll1.get(i-1);
+        return lca;
+
+
+
+
     }
+    public static boolean  path(Node root,int val,ArrayList<Integer> ll){
+        if(root==null){
+            return false;
+        }
+        ll.add(root.data);
+        if(root.data==val){
+            return true;
+        }
+        boolean left=path(root.left, val, ll);
+        boolean right=path(root.right, val, ll);
+        if(left|| right){
+            return true;
+        }
+        ll.remove(ll.size()-1);
+        return false;
+
+
+
+
+
+    }   
+    
+    
     public static void main(String[] args) {
         /*Scanner sc=new Scanner(System.in);
          
@@ -183,7 +158,7 @@ public class tree_all {
         //System.out.print(root1.data);
         idx=nodes.length-1;
         //levelOrder(root1);
-        Zigzag(root1);
+        //Zigzag(root1);
         
     }
 
