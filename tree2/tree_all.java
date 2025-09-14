@@ -142,6 +142,54 @@ public class tree_all {
 
 
     }   
+    public static void morrisin(Node root){
+        Node curr=root;
+        while(curr!=null){
+        if(curr.left==null){
+            System.out.print(curr.data+" ");
+            curr=curr.right;
+        }
+        else{
+            Node prev=curr.left;
+            while(prev.right!=null && prev.right!= curr){
+                prev=prev.right;
+            }
+            if(prev.right==null){
+                prev.right=curr;
+                curr=curr.left;
+            }
+            else{
+                prev.right=null;
+                System.out.print(curr.data+" ");
+                curr=curr.right;
+            }
+        }
+    }
+    }
+    public static void morrispre(Node root){
+        Node curr=root;
+        while(curr!=null){
+            if(curr.left==null){
+                System.out.print(curr.data+" ");
+                curr=curr.right;
+            }
+            else{
+                Node prev=curr.left;
+                while(prev.right!=null && prev.right!=curr){
+                    prev=prev.right;
+                }
+                if(prev.right==null){
+                    prev.right=curr;
+                    System.out.print(curr.data+" ");
+                    curr=curr.left;
+                }
+                else{
+                    prev.right=null;
+                    curr=curr.right;
+                }
+            }
+        }
+    }
     
     
     public static void main(String[] args) {
@@ -155,6 +203,7 @@ public class tree_all {
         System.out.println(max);*/
         int[] nodes={10,20,40,-1,-1,50,-1,-1,30,60,-1,-1,70,-1,-1};
         Node root1=buildpre(nodes);
+        morrispre(root1);
         //System.out.print(root1.data);
         idx=nodes.length-1;
         //levelOrder(root1);
