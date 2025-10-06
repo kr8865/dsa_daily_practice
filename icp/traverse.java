@@ -5,10 +5,15 @@ public class traverse {
         //column(arr);
         //reverse(arr);
         //spiral(arr);
-        int[][] a=new int[2][];
-        arr[0]=new int[3];
-        arr[1]=new int[5];
-        System.out.println(a[1].length);
+        //int[][] a=new int[2][];
+        //arr[0]=new int[3];
+        //arr[1]=new int[5];
+        //System.out.println(a[1].length);
+        if(System.out.printf("hello world") != null){
+
+        }
+       
+        
 
         
 
